@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ErmasCarMapper" >
+  <resultMap id="BaseResultMap" type="entity.ErmasCar" >
+    <id column="CARD_ID" property="cardId" jdbcType="DECIMAL" />
+    <result column="ORG" property="org" jdbcType="CHAR" />
+    <result column="ACCT_NBR" property="acctNbr" jdbcType="DECIMAL" />
+    <result column="ACCT_TYPE" property="acctType" jdbcType="CHAR" />
+    <result column="APPLICATION_NO" property="applicationNo" jdbcType="VARCHAR" />
+    <result column="CONTR_NBR" property="contrNbr" jdbcType="VARCHAR" />
+    <result column="DEALER_ID" property="dealerId" jdbcType="VARCHAR" />
+    <result column="DEALER_NAME" property="dealerName" jdbcType="VARCHAR" />
+    <result column="DEALER_COMPANY_ID" property="dealerCompanyId" jdbcType="VARCHAR" />
+    <result column="DEALER_COMPANY_NAME" property="dealerCompanyName" jdbcType="VARCHAR" />
+    <result column="DEALER_MOBILE_NO" property="dealerMobileNo" jdbcType="VARCHAR" />
+    <result column="STORE_NO" property="storeNo" jdbcType="VARCHAR" />
+    <result column="CAR_BRAND" property="carBrand" jdbcType="VARCHAR" />
+    <result column="CAR_LICENSE_NO" property="carLicenseNo" jdbcType="VARCHAR" />
+    <result column="CAR_MODEL_NO" property="carModelNo" jdbcType="VARCHAR" />
+    <result column="TRANSFER_TIMES" property="transferTimes" jdbcType="VARCHAR" />
+    <result column="CAR_FRAME_NO" property="carFrameNo" jdbcType="VARCHAR" />
+    <result column="CAR_ENGINE_NO" property="carEngineNo" jdbcType="VARCHAR" />
+    <result column="CAR_COLOR" property="carColor" jdbcType="VARCHAR" />
+    <result column="TRAVEL_MILEAGE" property="travelMileage" jdbcType="DECIMAL" />
+    <result column="PURCHASE_TIME" property="purchaseTime" jdbcType="DATE" />
+    <result column="PURCHASE_AMT" property="purchaseAmt" jdbcType="DECIMAL" />
+    <result column="CAR_PRICE" property="carPrice" jdbcType="DECIMAL" />
+    <result column="LOAN_AMT" property="loanAmt" jdbcType="DECIMAL" />
+    <result column="BIZ_DATE" property="bizDate" jdbcType="DATE" />
+    <result column="ACCESSED_VALUE" property="accessedValue" jdbcType="DECIMAL" />
+    <result column="MORTGAGE_IND" property="mortgageInd" jdbcType="CHAR" />
+    <result column="RETURN_AMT" property="returnAmt" jdbcType="DECIMAL" />
+    <result column="RETURN_MER_FEE" property="returnMerFee" jdbcType="DECIMAL" />
+    <result column="RETURN_IND" property="returnInd" jdbcType="CHAR" />
+    <result column="RETURN_DATE" property="returnDate" jdbcType="DATE" />
+    <result column="BIZ_TIME" property="bizTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="LST_UPD_TIME" property="lstUpdTime" jdbcType="TIMESTAMP" />
+    <result column="LST_UPD_USER" property="lstUpdUser" jdbcType="VARCHAR" />
+    <result column="JPA_VERSION" property="jpaVersion" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CARD_ID, ORG, ACCT_NBR, ACCT_TYPE, APPLICATION_NO, CONTR_NBR, DEALER_ID, DEALER_NAME, 
+    DEALER_COMPANY_ID, DEALER_COMPANY_NAME, DEALER_MOBILE_NO, STORE_NO, CAR_BRAND, CAR_LICENSE_NO, 
+    CAR_MODEL_NO, TRANSFER_TIMES, CAR_FRAME_NO, CAR_ENGINE_NO, CAR_COLOR, TRAVEL_MILEAGE, 
+    PURCHASE_TIME, PURCHASE_AMT, CAR_PRICE, LOAN_AMT, BIZ_DATE, ACCESSED_VALUE, MORTGAGE_IND, 
+    RETURN_AMT, RETURN_MER_FEE, RETURN_IND, RETURN_DATE, BIZ_TIME, CREATE_TIME, CREATE_USER, 
+    LST_UPD_TIME, LST_UPD_USER, JPA_VERSION
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="entity.ErmasCarExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ermas_car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ermas_car
+    where CARD_ID = #{cardId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ermas_car
+    where CARD_ID = #{cardId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="entity.ErmasCarExample" >
+    delete from ermas_car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entity.ErmasCar" >
+    insert into ermas_car (CARD_ID, ORG, ACCT_NBR, 
+      ACCT_TYPE, APPLICATION_NO, CONTR_NBR, 
+      DEALER_ID, DEALER_NAME, DEALER_COMPANY_ID, 
+      DEALER_COMPANY_NAME, DEALER_MOBILE_NO, STORE_NO, 
+      CAR_BRAND, CAR_LICENSE_NO, CAR_MODEL_NO, 
+      TRANSFER_TIMES, CAR_FRAME_NO, CAR_ENGINE_NO, 
+      CAR_COLOR, TRAVEL_MILEAGE, PURCHASE_TIME, 
+      PURCHASE_AMT, CAR_PRICE, LOAN_AMT, 
+      BIZ_DATE, ACCESSED_VALUE, MORTGAGE_IND, 
+      RETURN_AMT, RETURN_MER_FEE, RETURN_IND, 
+      RETURN_DATE, BIZ_TIME, CREATE_TIME, 
+      CREATE_USER, LST_UPD_TIME, LST_UPD_USER, 
+      JPA_VERSION)
+    values (#{cardId,jdbcType=DECIMAL}, #{org,jdbcType=CHAR}, #{acctNbr,jdbcType=DECIMAL}, 
+      #{acctType,jdbcType=CHAR}, #{applicationNo,jdbcType=VARCHAR}, #{contrNbr,jdbcType=VARCHAR}, 
+      #{dealerId,jdbcType=VARCHAR}, #{dealerName,jdbcType=VARCHAR}, #{dealerCompanyId,jdbcType=VARCHAR}, 
+      #{dealerCompanyName,jdbcType=VARCHAR}, #{dealerMobileNo,jdbcType=VARCHAR}, #{storeNo,jdbcType=VARCHAR}, 
+      #{carBrand,jdbcType=VARCHAR}, #{carLicenseNo,jdbcType=VARCHAR}, #{carModelNo,jdbcType=VARCHAR}, 
+      #{transferTimes,jdbcType=VARCHAR}, #{carFrameNo,jdbcType=VARCHAR}, #{carEngineNo,jdbcType=VARCHAR}, 
+      #{carColor,jdbcType=VARCHAR}, #{travelMileage,jdbcType=DECIMAL}, #{purchaseTime,jdbcType=DATE}, 
+      #{purchaseAmt,jdbcType=DECIMAL}, #{carPrice,jdbcType=DECIMAL}, #{loanAmt,jdbcType=DECIMAL}, 
+      #{bizDate,jdbcType=DATE}, #{accessedValue,jdbcType=DECIMAL}, #{mortgageInd,jdbcType=CHAR}, 
+      #{returnAmt,jdbcType=DECIMAL}, #{returnMerFee,jdbcType=DECIMAL}, #{returnInd,jdbcType=CHAR}, 
+      #{returnDate,jdbcType=DATE}, #{bizTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{lstUpdTime,jdbcType=TIMESTAMP}, #{lstUpdUser,jdbcType=VARCHAR}, 
+      #{jpaVersion,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.ErmasCar" >
+    insert into ermas_car
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cardId != null" >
+        CARD_ID,
+      </if>
+      <if test="org != null" >
+        ORG,
+      </if>
+      <if test="acctNbr != null" >
+        ACCT_NBR,
+      </if>
+      <if test="acctType != null" >
+        ACCT_TYPE,
+      </if>
+      <if test="applicationNo != null" >
+        APPLICATION_NO,
+      </if>
+      <if test="contrNbr != null" >
+        CONTR_NBR,
+      </if>
+      <if test="dealerId != null" >
+        DEALER_ID,
+      </if>
+      <if test="dealerName != null" >
+        DEALER_NAME,
+      </if>
+      <if test="dealerCompanyId != null" >
+        DEALER_COMPANY_ID,
+      </if>
+      <if test="dealerCompanyName != null" >
+        DEALER_COMPANY_NAME,
+      </if>
+      <if test="dealerMobileNo != null" >
+        DEALER_MOBILE_NO,
+      </if>
+      <if test="storeNo != null" >
+        STORE_NO,
+      </if>
+      <if test="carBrand != null" >
+        CAR_BRAND,
+      </if>
+      <if test="carLicenseNo != null" >
+        CAR_LICENSE_NO,
+      </if>
+      <if test="carModelNo != null" >
+        CAR_MODEL_NO,
+      </if>
+      <if test="transferTimes != null" >
+        TRANSFER_TIMES,
+      </if>
+      <if test="carFrameNo != null" >
+        CAR_FRAME_NO,
+      </if>
+      <if test="carEngineNo != null" >
+        CAR_ENGINE_NO,
+      </if>
+      <if test="carColor != null" >
+        CAR_COLOR,
+      </if>
+      <if test="travelMileage != null" >
+        TRAVEL_MILEAGE,
+      </if>
+      <if test="purchaseTime != null" >
+        PURCHASE_TIME,
+      </if>
+      <if test="purchaseAmt != null" >
+        PURCHASE_AMT,
+      </if>
+      <if test="carPrice != null" >
+        CAR_PRICE,
+      </if>
+      <if test="loanAmt != null" >
+        LOAN_AMT,
+      </if>
+      <if test="bizDate != null" >
+        BIZ_DATE,
+      </if>
+      <if test="accessedValue != null" >
+        ACCESSED_VALUE,
+      </if>
+      <if test="mortgageInd != null" >
+        MORTGAGE_IND,
+      </if>
+      <if test="returnAmt != null" >
+        RETURN_AMT,
+      </if>
+      <if test="returnMerFee != null" >
+        RETURN_MER_FEE,
+      </if>
+      <if test="returnInd != null" >
+        RETURN_IND,
+      </if>
+      <if test="returnDate != null" >
+        RETURN_DATE,
+      </if>
+      <if test="bizTime != null" >
+        BIZ_TIME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="lstUpdTime != null" >
+        LST_UPD_TIME,
+      </if>
+      <if test="lstUpdUser != null" >
+        LST_UPD_USER,
+      </if>
+      <if test="jpaVersion != null" >
+        JPA_VERSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cardId != null" >
+        #{cardId,jdbcType=DECIMAL},
+      </if>
+      <if test="org != null" >
+        #{org,jdbcType=CHAR},
+      </if>
+      <if test="acctNbr != null" >
+        #{acctNbr,jdbcType=DECIMAL},
+      </if>
+      <if test="acctType != null" >
+        #{acctType,jdbcType=CHAR},
+      </if>
+      <if test="applicationNo != null" >
+        #{applicationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contrNbr != null" >
+        #{contrNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerId != null" >
+        #{dealerId,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerName != null" >
+        #{dealerName,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerCompanyId != null" >
+        #{dealerCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerCompanyName != null" >
+        #{dealerCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerMobileNo != null" >
+        #{dealerMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="storeNo != null" >
+        #{storeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="carBrand != null" >
+        #{carBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="carLicenseNo != null" >
+        #{carLicenseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="carModelNo != null" >
+        #{carModelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="transferTimes != null" >
+        #{transferTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="carFrameNo != null" >
+        #{carFrameNo,jdbcType=VARCHAR},
+      </if>
+      <if test="carEngineNo != null" >
+        #{carEngineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="carColor != null" >
+        #{carColor,jdbcType=VARCHAR},
+      </if>
+      <if test="travelMileage != null" >
+        #{travelMileage,jdbcType=DECIMAL},
+      </if>
+      <if test="purchaseTime != null" >
+        #{purchaseTime,jdbcType=DATE},
+      </if>
+      <if test="purchaseAmt != null" >
+        #{purchaseAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="carPrice != null" >
+        #{carPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="loanAmt != null" >
+        #{loanAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="bizDate != null" >
+        #{bizDate,jdbcType=DATE},
+      </if>
+      <if test="accessedValue != null" >
+        #{accessedValue,jdbcType=DECIMAL},
+      </if>
+      <if test="mortgageInd != null" >
+        #{mortgageInd,jdbcType=CHAR},
+      </if>
+      <if test="returnAmt != null" >
+        #{returnAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="returnMerFee != null" >
+        #{returnMerFee,jdbcType=DECIMAL},
+      </if>
+      <if test="returnInd != null" >
+        #{returnInd,jdbcType=CHAR},
+      </if>
+      <if test="returnDate != null" >
+        #{returnDate,jdbcType=DATE},
+      </if>
+      <if test="bizTime != null" >
+        #{bizTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lstUpdTime != null" >
+        #{lstUpdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstUpdUser != null" >
+        #{lstUpdUser,jdbcType=VARCHAR},
+      </if>
+      <if test="jpaVersion != null" >
+        #{jpaVersion,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entity.ErmasCarExample" resultType="java.lang.Integer" >
+    select count(*) from ermas_car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ermas_car
+    <set >
+      <if test="record.cardId != null" >
+        CARD_ID = #{record.cardId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.org != null" >
+        ORG = #{record.org,jdbcType=CHAR},
+      </if>
+      <if test="record.acctNbr != null" >
+        ACCT_NBR = #{record.acctNbr,jdbcType=DECIMAL},
+      </if>
+      <if test="record.acctType != null" >
+        ACCT_TYPE = #{record.acctType,jdbcType=CHAR},
+      </if>
+      <if test="record.applicationNo != null" >
+        APPLICATION_NO = #{record.applicationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contrNbr != null" >
+        CONTR_NBR = #{record.contrNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealerId != null" >
+        DEALER_ID = #{record.dealerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealerName != null" >
+        DEALER_NAME = #{record.dealerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealerCompanyId != null" >
+        DEALER_COMPANY_ID = #{record.dealerCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealerCompanyName != null" >
+        DEALER_COMPANY_NAME = #{record.dealerCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealerMobileNo != null" >
+        DEALER_MOBILE_NO = #{record.dealerMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeNo != null" >
+        STORE_NO = #{record.storeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carBrand != null" >
+        CAR_BRAND = #{record.carBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carLicenseNo != null" >
+        CAR_LICENSE_NO = #{record.carLicenseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carModelNo != null" >
+        CAR_MODEL_NO = #{record.carModelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transferTimes != null" >
+        TRANSFER_TIMES = #{record.transferTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carFrameNo != null" >
+        CAR_FRAME_NO = #{record.carFrameNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carEngineNo != null" >
+        CAR_ENGINE_NO = #{record.carEngineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carColor != null" >
+        CAR_COLOR = #{record.carColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.travelMileage != null" >
+        TRAVEL_MILEAGE = #{record.travelMileage,jdbcType=DECIMAL},
+      </if>
+      <if test="record.purchaseTime != null" >
+        PURCHASE_TIME = #{record.purchaseTime,jdbcType=DATE},
+      </if>
+      <if test="record.purchaseAmt != null" >
+        PURCHASE_AMT = #{record.purchaseAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.carPrice != null" >
+        CAR_PRICE = #{record.carPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.loanAmt != null" >
+        LOAN_AMT = #{record.loanAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bizDate != null" >
+        BIZ_DATE = #{record.bizDate,jdbcType=DATE},
+      </if>
+      <if test="record.accessedValue != null" >
+        ACCESSED_VALUE = #{record.accessedValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mortgageInd != null" >
+        MORTGAGE_IND = #{record.mortgageInd,jdbcType=CHAR},
+      </if>
+      <if test="record.returnAmt != null" >
+        RETURN_AMT = #{record.returnAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.returnMerFee != null" >
+        RETURN_MER_FEE = #{record.returnMerFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.returnInd != null" >
+        RETURN_IND = #{record.returnInd,jdbcType=CHAR},
+      </if>
+      <if test="record.returnDate != null" >
+        RETURN_DATE = #{record.returnDate,jdbcType=DATE},
+      </if>
+      <if test="record.bizTime != null" >
+        BIZ_TIME = #{record.bizTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lstUpdTime != null" >
+        LST_UPD_TIME = #{record.lstUpdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lstUpdUser != null" >
+        LST_UPD_USER = #{record.lstUpdUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jpaVersion != null" >
+        JPA_VERSION = #{record.jpaVersion,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ermas_car
+    set CARD_ID = #{record.cardId,jdbcType=DECIMAL},
+      ORG = #{record.org,jdbcType=CHAR},
+      ACCT_NBR = #{record.acctNbr,jdbcType=DECIMAL},
+      ACCT_TYPE = #{record.acctType,jdbcType=CHAR},
+      APPLICATION_NO = #{record.applicationNo,jdbcType=VARCHAR},
+      CONTR_NBR = #{record.contrNbr,jdbcType=VARCHAR},
+      DEALER_ID = #{record.dealerId,jdbcType=VARCHAR},
+      DEALER_NAME = #{record.dealerName,jdbcType=VARCHAR},
+      DEALER_COMPANY_ID = #{record.dealerCompanyId,jdbcType=VARCHAR},
+      DEALER_COMPANY_NAME = #{record.dealerCompanyName,jdbcType=VARCHAR},
+      DEALER_MOBILE_NO = #{record.dealerMobileNo,jdbcType=VARCHAR},
+      STORE_NO = #{record.storeNo,jdbcType=VARCHAR},
+      CAR_BRAND = #{record.carBrand,jdbcType=VARCHAR},
+      CAR_LICENSE_NO = #{record.carLicenseNo,jdbcType=VARCHAR},
+      CAR_MODEL_NO = #{record.carModelNo,jdbcType=VARCHAR},
+      TRANSFER_TIMES = #{record.transferTimes,jdbcType=VARCHAR},
+      CAR_FRAME_NO = #{record.carFrameNo,jdbcType=VARCHAR},
+      CAR_ENGINE_NO = #{record.carEngineNo,jdbcType=VARCHAR},
+      CAR_COLOR = #{record.carColor,jdbcType=VARCHAR},
+      TRAVEL_MILEAGE = #{record.travelMileage,jdbcType=DECIMAL},
+      PURCHASE_TIME = #{record.purchaseTime,jdbcType=DATE},
+      PURCHASE_AMT = #{record.purchaseAmt,jdbcType=DECIMAL},
+      CAR_PRICE = #{record.carPrice,jdbcType=DECIMAL},
+      LOAN_AMT = #{record.loanAmt,jdbcType=DECIMAL},
+      BIZ_DATE = #{record.bizDate,jdbcType=DATE},
+      ACCESSED_VALUE = #{record.accessedValue,jdbcType=DECIMAL},
+      MORTGAGE_IND = #{record.mortgageInd,jdbcType=CHAR},
+      RETURN_AMT = #{record.returnAmt,jdbcType=DECIMAL},
+      RETURN_MER_FEE = #{record.returnMerFee,jdbcType=DECIMAL},
+      RETURN_IND = #{record.returnInd,jdbcType=CHAR},
+      RETURN_DATE = #{record.returnDate,jdbcType=DATE},
+      BIZ_TIME = #{record.bizTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      LST_UPD_TIME = #{record.lstUpdTime,jdbcType=TIMESTAMP},
+      LST_UPD_USER = #{record.lstUpdUser,jdbcType=VARCHAR},
+      JPA_VERSION = #{record.jpaVersion,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.ErmasCar" >
+    update ermas_car
+    <set >
+      <if test="org != null" >
+        ORG = #{org,jdbcType=CHAR},
+      </if>
+      <if test="acctNbr != null" >
+        ACCT_NBR = #{acctNbr,jdbcType=DECIMAL},
+      </if>
+      <if test="acctType != null" >
+        ACCT_TYPE = #{acctType,jdbcType=CHAR},
+      </if>
+      <if test="applicationNo != null" >
+        APPLICATION_NO = #{applicationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contrNbr != null" >
+        CONTR_NBR = #{contrNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerId != null" >
+        DEALER_ID = #{dealerId,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerName != null" >
+        DEALER_NAME = #{dealerName,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerCompanyId != null" >
+        DEALER_COMPANY_ID = #{dealerCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerCompanyName != null" >
+        DEALER_COMPANY_NAME = #{dealerCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerMobileNo != null" >
+        DEALER_MOBILE_NO = #{dealerMobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="storeNo != null" >
+        STORE_NO = #{storeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="carBrand != null" >
+        CAR_BRAND = #{carBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="carLicenseNo != null" >
+        CAR_LICENSE_NO = #{carLicenseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="carModelNo != null" >
+        CAR_MODEL_NO = #{carModelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="transferTimes != null" >
+        TRANSFER_TIMES = #{transferTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="carFrameNo != null" >
+        CAR_FRAME_NO = #{carFrameNo,jdbcType=VARCHAR},
+      </if>
+      <if test="carEngineNo != null" >
+        CAR_ENGINE_NO = #{carEngineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="carColor != null" >
+        CAR_COLOR = #{carColor,jdbcType=VARCHAR},
+      </if>
+      <if test="travelMileage != null" >
+        TRAVEL_MILEAGE = #{travelMileage,jdbcType=DECIMAL},
+      </if>
+      <if test="purchaseTime != null" >
+        PURCHASE_TIME = #{purchaseTime,jdbcType=DATE},
+      </if>
+      <if test="purchaseAmt != null" >
+        PURCHASE_AMT = #{purchaseAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="carPrice != null" >
+        CAR_PRICE = #{carPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="loanAmt != null" >
+        LOAN_AMT = #{loanAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="bizDate != null" >
+        BIZ_DATE = #{bizDate,jdbcType=DATE},
+      </if>
+      <if test="accessedValue != null" >
+        ACCESSED_VALUE = #{accessedValue,jdbcType=DECIMAL},
+      </if>
+      <if test="mortgageInd != null" >
+        MORTGAGE_IND = #{mortgageInd,jdbcType=CHAR},
+      </if>
+      <if test="returnAmt != null" >
+        RETURN_AMT = #{returnAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="returnMerFee != null" >
+        RETURN_MER_FEE = #{returnMerFee,jdbcType=DECIMAL},
+      </if>
+      <if test="returnInd != null" >
+        RETURN_IND = #{returnInd,jdbcType=CHAR},
+      </if>
+      <if test="returnDate != null" >
+        RETURN_DATE = #{returnDate,jdbcType=DATE},
+      </if>
+      <if test="bizTime != null" >
+        BIZ_TIME = #{bizTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lstUpdTime != null" >
+        LST_UPD_TIME = #{lstUpdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstUpdUser != null" >
+        LST_UPD_USER = #{lstUpdUser,jdbcType=VARCHAR},
+      </if>
+      <if test="jpaVersion != null" >
+        JPA_VERSION = #{jpaVersion,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where CARD_ID = #{cardId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.ErmasCar" >
+    update ermas_car
+    set ORG = #{org,jdbcType=CHAR},
+      ACCT_NBR = #{acctNbr,jdbcType=DECIMAL},
+      ACCT_TYPE = #{acctType,jdbcType=CHAR},
+      APPLICATION_NO = #{applicationNo,jdbcType=VARCHAR},
+      CONTR_NBR = #{contrNbr,jdbcType=VARCHAR},
+      DEALER_ID = #{dealerId,jdbcType=VARCHAR},
+      DEALER_NAME = #{dealerName,jdbcType=VARCHAR},
+      DEALER_COMPANY_ID = #{dealerCompanyId,jdbcType=VARCHAR},
+      DEALER_COMPANY_NAME = #{dealerCompanyName,jdbcType=VARCHAR},
+      DEALER_MOBILE_NO = #{dealerMobileNo,jdbcType=VARCHAR},
+      STORE_NO = #{storeNo,jdbcType=VARCHAR},
+      CAR_BRAND = #{carBrand,jdbcType=VARCHAR},
+      CAR_LICENSE_NO = #{carLicenseNo,jdbcType=VARCHAR},
+      CAR_MODEL_NO = #{carModelNo,jdbcType=VARCHAR},
+      TRANSFER_TIMES = #{transferTimes,jdbcType=VARCHAR},
+      CAR_FRAME_NO = #{carFrameNo,jdbcType=VARCHAR},
+      CAR_ENGINE_NO = #{carEngineNo,jdbcType=VARCHAR},
+      CAR_COLOR = #{carColor,jdbcType=VARCHAR},
+      TRAVEL_MILEAGE = #{travelMileage,jdbcType=DECIMAL},
+      PURCHASE_TIME = #{purchaseTime,jdbcType=DATE},
+      PURCHASE_AMT = #{purchaseAmt,jdbcType=DECIMAL},
+      CAR_PRICE = #{carPrice,jdbcType=DECIMAL},
+      LOAN_AMT = #{loanAmt,jdbcType=DECIMAL},
+      BIZ_DATE = #{bizDate,jdbcType=DATE},
+      ACCESSED_VALUE = #{accessedValue,jdbcType=DECIMAL},
+      MORTGAGE_IND = #{mortgageInd,jdbcType=CHAR},
+      RETURN_AMT = #{returnAmt,jdbcType=DECIMAL},
+      RETURN_MER_FEE = #{returnMerFee,jdbcType=DECIMAL},
+      RETURN_IND = #{returnInd,jdbcType=CHAR},
+      RETURN_DATE = #{returnDate,jdbcType=DATE},
+      BIZ_TIME = #{bizTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      LST_UPD_TIME = #{lstUpdTime,jdbcType=TIMESTAMP},
+      LST_UPD_USER = #{lstUpdUser,jdbcType=VARCHAR},
+      JPA_VERSION = #{jpaVersion,jdbcType=DECIMAL}
+    where CARD_ID = #{cardId,jdbcType=DECIMAL}
+  </update>
+</mapper>
